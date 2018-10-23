@@ -21,9 +21,7 @@ public class Earthquake {
         return mEarthquakeMagnitude;
     }
 
-    public String getEarthquakeLocation() {
-        return mEarthquakeLocation;
-    }
+    public String getEarthquakeLocation() { return mEarthquakeLocation; }
 
     public String getEarthquakeDate() {
         return mEarthquakeDate;
