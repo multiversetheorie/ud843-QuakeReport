@@ -24,6 +24,8 @@
         android:layout_weight="1"
         android:layout_height="match_parent">
 
+        <!-- TODO: Solve NestedWeights issue, probably by using RelativeLayout -->
+
         <TextView
             android:id="@+id/quake_date"
             android:layout_width="match_parent"
