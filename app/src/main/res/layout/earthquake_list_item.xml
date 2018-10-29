@@ -13,31 +13,36 @@
         android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/quake_location"
+        android:id="@+id/quake_location_offset"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent" />
 
-    <LinearLayout
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/quake_location_primary"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <!-- TODO: Solve NestedWeights issue, probably by using RelativeLayout -->
 
         <TextView
             android:id="@+id/quake_date"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"/>
 
         <TextView
             android:id="@+id/quake_time"
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="0dp" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

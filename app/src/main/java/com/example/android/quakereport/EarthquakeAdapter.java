@@ -32,11 +32,30 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.quake_magnitude);
         magnitudeTextView.setText(currentEarthquake.getEarthquakeMagnitude());
 
-        TextView locationTextView = (TextView) listItemView.findViewById(R.id.quake_location);
-        locationTextView.setText(currentEarthquake.getEarthquakeLocation());
+        // Split raw location into primary location and location offset
+        String rawLocation = currentEarthquake.getEarthquakeLocation();
+        String lookupCharSequence = "of";
+        String locationOffset;
+        String locationPrimary;
+        if (rawLocation.contains(lookupCharSequence)) {
+            locationOffset = rawLocation.substring(0,rawLocation.indexOf(lookupCharSequence)+2);
+            locationPrimary = rawLocation.substring(rawLocation.indexOf(lookupCharSequence)+3,rawLocation.length());
+        }
+        else {
+            locationPrimary = rawLocation;
+            locationOffset = "Near the";
+        }
 
+        // Pass in locationOffset String to its TextView
+        TextView locationOffsetTextView = (TextView) listItemView.findViewById(R.id.quake_location_offset);
+        locationOffsetTextView.setText(locationOffset);
+        // Pass in locationPrimary String to its TextView
+        TextView locationPrimaryTextView = (TextView) listItemView.findViewById(R.id.quake_location_primary);
+        locationPrimaryTextView.setText(locationPrimary);
+
+        // Format date of current earthquake as two different date formats: date and time
         Date earthquakeDateObject = new Date(currentEarthquake.getEarthquakeDate());
-        SimpleDateFormat earthquakeDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat earthquakeDateFormatter = new SimpleDateFormat("yyyy.MM.dd");
         SimpleDateFormat earthquakeTimeFormatter = new SimpleDateFormat("HH:mm");
         String dateToDisplay = earthquakeDateFormatter.format(earthquakeDateObject);
         String timeToDisplay = earthquakeTimeFormatter.format(earthquakeDateObject);
