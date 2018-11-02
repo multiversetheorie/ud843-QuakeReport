@@ -1,6 +1,8 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,54 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
     public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
+    }
+
+    // This private method takes in a double and returns an integer
+    private int getMagnitudeColor (double magnitude){
+        // magnitudeColorResourceId is the variable storing the color resource ID integer,
+        // that the method gets from color resource IDs
+        int magnitudeColorResourceId;
+        // We convert the input double to an integer,
+        // because the switch statement cannot take in doubles
+        int magnitudeFloor = (int) Math.floor(magnitude);
+        // This statement determines the value of magnitudeColorResourceId
+        // depending on the value of the method input
+        switch (magnitudeFloor) {
+            case 0:
+            case 1:
+                magnitudeColorResourceId = R.color.magnitude1;
+                break;
+            case 2:
+                magnitudeColorResourceId = R.color.magnitude2;
+                break;
+            case 3:
+                magnitudeColorResourceId = R.color.magnitude3;
+                break;
+            case 4:
+                magnitudeColorResourceId = R.color.magnitude4;
+                break;
+            case 5:
+                magnitudeColorResourceId = R.color.magnitude5;
+                break;
+            case 6:
+                magnitudeColorResourceId = R.color.magnitude6;
+                break;
+            case 7:
+                magnitudeColorResourceId = R.color.magnitude7;
+                break;
+            case 8:
+                magnitudeColorResourceId = R.color.magnitude8;
+                break;
+            case 9:
+                magnitudeColorResourceId = R.color.magnitude9;
+                break;
+            default:
+                magnitudeColorResourceId = R.color.magnitude10plus;
+                break;
+        }
+        // We convert the color resource ID (which is just a reference to a resource)
+        // to an actual integer color value and return it
+        return ContextCompat.getColor(getContext(), magnitudeColorResourceId);
     }
 
 
@@ -37,6 +87,16 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         // Pass in the formattedMag String to its TextView
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.quake_magnitude);
         magnitudeTextView.setText(formattedMag);
+
+        // Set the proper background color on the magnitude circle.
+        // Fetch the background from the TextView, which is a GradientDrawable.
+        GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeTextView.getBackground();
+
+        // Get the appropriate background color based on the current earthquake magnitude
+        int magnitudeColor = getMagnitudeColor(currentEarthquake.getEarthquakeMagnitude());
+
+        // Set the color on the magnitude circle
+        magnitudeCircle.setColor(magnitudeColor);
 
         // Split raw location into primary location and location offset
         String rawLocation = currentEarthquake.getEarthquakeLocation();
