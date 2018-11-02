@@ -69,8 +69,10 @@ public final class QueryUtils {
                 String location = jsonPropertiesObject.optString("place");
                 // Extract "time" for time
                 long time = jsonPropertiesObject.optLong("time");
+                // Extract "url" for url
+                String url = jsonPropertiesObject.optString("url");
 
-                Earthquake earthquake = new Earthquake(magnitude, location, time);
+                Earthquake earthquake = new Earthquake(magnitude, location, time, url);
                 earthquakes.add(earthquake);
             }
 
